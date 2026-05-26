@@ -6,7 +6,7 @@ function Hero() {
         Digital Community Platform
       </div>
 
-      <h1 className="text-6xl md:text-8xl font-black leading-tight max-w-6xl">
+      <h1 className="text-4xl md:text-7xl font-black leading-tight">
 
         Connect
         <span className="text-blue-500">
