@@ -24,7 +24,7 @@ function Login() {
         </h1>
 
         <p className="text-zinc-400 text-center mb-10">
-          Sign in to IT Connect
+          Sign in to IT Project Hub
         </p>
 
         <button

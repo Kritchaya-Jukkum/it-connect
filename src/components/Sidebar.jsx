@@ -17,11 +17,11 @@ function Sidebar() {
         <div>
 
           <h1 className="text-2xl font-bold text-white">
-            IT Connect
+            IT Project Hub
           </h1>
 
           <p className="text-zinc-500 text-sm">
-            Community Platform
+            Project Repository Platform
           </p>
 
         </div>
@@ -41,7 +41,7 @@ function Sidebar() {
             </span>
 
             <span className="font-semibold">
-              Community Feed
+              Project Feed
             </span>
 
           </div>
@@ -57,26 +57,29 @@ function Sidebar() {
             </span>
 
             <span>
-              Create Post
+              Add Project
             </span>
 
           </div>
 
         </Link>
 
-        <Link to="/dashboard">
+<Link to="/dashboard">
 
-          <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-900 transition">
+  <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-900 transition">
 
-            <span className="text-xl">
-              📊
-            </span>
+    <span className="text-xl">
+      📊
+    </span>
 
-            <span>
-              Dashboard
-            </span>
+    <span>
+      Dashboard
+    </span>
 
-          </div>
+  </div>
+
+</Link>
+
 <Link to="/profile">
 
   <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-900 transition">
@@ -92,31 +95,11 @@ function Sidebar() {
   </div>
 
 </Link>
-        </Link>
 
-        <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-900 transition cursor-pointer">
 
-          <span className="text-xl">
-            🔔
-          </span>
+      
 
-          <span>
-            Notifications
-          </span>
-
-        </div>
-
-        <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-900 transition cursor-pointer">
-
-          <span className="text-xl">
-            💬
-          </span>
-
-          <span>
-            Messages
-          </span>
-
-        </div>
+      
 
       </nav>
 
@@ -125,16 +108,16 @@ function Sidebar() {
       <div className="mt-auto p-6 rounded-3xl bg-gradient-to-br from-blue-600 to-purple-600">
 
         <h2 className="text-2xl font-bold mb-3">
-          IT Connect
+          IT Project Hub
         </h2>
 
         <p className="text-sm text-white/80 mb-5">
-          Connect with your IT community.
+          Explore student projects and innovations.
         </p>
 
         <button className="w-full py-3 rounded-2xl bg-white text-black font-bold">
 
-          Explore
+          View Projects
 
         </button>
 

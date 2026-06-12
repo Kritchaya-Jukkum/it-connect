@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 
 import { Link } from "react-router-dom"
 
@@ -6,59 +6,10 @@ import Sidebar from "../components/Sidebar"
 import Rightbar from "../components/Rightbar"
 
 import { PostContext } from "../context/PostContext"
-import { AuthContext } from "../context/AuthContext"
-
-import { db } from "../firebase/firebase"
-
-import { collection, addDoc } from "firebase/firestore"
 
 function Feed() {
 
   const { posts } = useContext(PostContext)
-
-  const { user } = useContext(AuthContext)
-
-  const [quickPost, setQuickPost] = useState("")
-
-  async function handleQuickPost() {
-
-    if (!quickPost) return
-
-    try {
-
-      await addDoc(collection(db, "posts"), {
-
-        category: "Community",
-
-        type: "POST",
-
-        title: quickPost,
-
-        location: "IT Connect",
-
-        user: user?.displayName || "Anonymous",
-
-        avatar: user?.photoURL || "",
-
-        time: "Just now",
-
-        image: "",
-
-        likes: 0,
-
-        comments: []
-
-      })
-
-      setQuickPost("")
-
-    } catch (error) {
-
-      console.log(error)
-
-    }
-
-  }
 
   return (
 
@@ -77,68 +28,32 @@ function Feed() {
           </button>
 
           <button className="px-5 py-2 rounded-2xl bg-zinc-900 border border-zinc-800 whitespace-nowrap">
-            Lost & Found
+            Web Application
           </button>
 
           <button className="px-5 py-2 rounded-2xl bg-zinc-900 border border-zinc-800 whitespace-nowrap">
-            Q&A
+            Mobile Application
           </button>
 
           <button className="px-5 py-2 rounded-2xl bg-zinc-900 border border-zinc-800 whitespace-nowrap">
-            Tutoring
+            Artificial Intelligence
           </button>
 
           <button className="px-5 py-2 rounded-2xl bg-zinc-900 border border-zinc-800 whitespace-nowrap">
-            Projects
+            Internet of Things (IoT)
           </button>
-
+<button className="px-5 py-2 rounded-2xl bg-zinc-900 border border-zinc-800 whitespace-nowrap">
+            Game Development
+          </button>
         </div>
 
-        {/* Composer */}
-
-        <div className="p-6 rounded-3xl bg-zinc-900 border border-zinc-800 mb-8">
-
-          <div className="flex gap-4">
-
-            <img
-              src={user?.photoURL}
-              className="w-12 h-12 md:w-14 md:h-14 rounded-full"
-            />
-
-            <div className="flex-1">
-
-              <textarea
-                placeholder="What's happening in IT today?"
-                value={quickPost}
-                onChange={(e) => setQuickPost(e.target.value)}
-                className="w-full p-4 rounded-2xl bg-zinc-950 border border-zinc-800 outline-none resize-none h-32"
-              />
-
-              <div className="flex justify-end mt-4">
-
-                <button
-                  onClick={handleQuickPost}
-                  className="px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 transition"
-                >
-
-                  Post
-
-                </button>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
+ 
         {/* Header */}
 
         <div className="flex items-center justify-between mb-10">
 
           <h1 className="text-3xl md:text-5xl font-bold">
-            Community Feed
+            Project Showcase
           </h1>
 
         </div>
@@ -192,38 +107,33 @@ function Feed() {
 
                   </div>
 
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm font-semibold
-
-                    ${post.category === "Lost & Found"
-                      ? "bg-red-500/20 text-red-400"
-
-                      : post.category === "Q&A"
-                      ? "bg-blue-500/20 text-blue-400"
-
-                      : post.category === "Tutoring"
-                      ? "bg-purple-500/20 text-purple-400"
-
-                      : "bg-zinc-700 text-zinc-300"
-                    }
-                    `}
-                  >
-
-                    {post.category}
-
-                  </span>
+                  <span className="px-3 py-1 rounded-full text-sm font-semibold bg-blue-500/20 text-blue-400">
+  {post.category}
+</span>
 
                 </div>
 
                 {/* Content */}
 
-                <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                  {post.title}
-                </h2>
+               <h2 className="text-2xl md:text-3xl font-bold mb-4">
+  {post.title}
+</h2>
 
-                <p className="text-zinc-400 mb-6">
-                  📍 {post.location}
-                </p>
+<p className="text-zinc-400 mb-2">
+  👥 {post.members}
+</p>
+
+<p className="text-zinc-400 mb-2">
+  👨‍🏫 {post.advisor}
+</p>
+
+<p className="text-zinc-400 mb-4">
+  🛠 {post.technology}
+</p>
+
+<p className="text-zinc-400 mb-6">
+  {post.description}
+</p>
 
                 {/* Actions */}
 
@@ -231,13 +141,13 @@ function Feed() {
 
                   <div className="flex items-center gap-2">
                     ❤️
-                    <span>{post.likes}</span>
+                    <span>{post.likes || 0}</span>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    💬
-                    <span>{post.comments.length}</span>
-                  </div>
+  💬
+  {post.comments?.length || 0}
+</div>
 
                 </div>
 
@@ -245,7 +155,7 @@ function Feed() {
 
                   <button className="w-full py-4 rounded-2xl bg-blue-600 hover:bg-blue-500 transition">
 
-                    View Details
+                    Project Details
 
                   </button>
 

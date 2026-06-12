@@ -15,7 +15,7 @@ function Navbar() {
         <div>
 
           <h1 className="text-2xl font-bold text-white">
-            IT Connect
+            IT Project Hub
           </h1>
 
           <p className="text-xs text-zinc-500">

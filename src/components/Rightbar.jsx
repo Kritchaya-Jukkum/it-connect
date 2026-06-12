@@ -6,7 +6,7 @@ function Rightbar() {
 
       <input
         type="text"
-        placeholder="Search..."
+        placeholder="Search projects..."
         className="w-full p-4 rounded-2xl bg-zinc-900 border border-zinc-800 outline-none mb-8"
       />
 
@@ -15,100 +15,84 @@ function Rightbar() {
       <div className="p-6 rounded-3xl bg-zinc-900 border border-zinc-800 mb-6">
 
         <h2 className="text-2xl font-bold mb-6">
-          Trending Topics
+          Featured Categories
         </h2>
 
         <div className="space-y-4">
 
-          <div>
-            <p className="text-zinc-500 text-sm">
-              Q&A
-            </p>
+ <div>
+  <p className="text-zinc-500 text-sm">
+    Category
+  </p>
 
-            <h3 className="font-semibold">
-              React Router
-            </h3>
-          </div>
+  <h3 className="font-semibold">
+    Web Application
+  </h3>
+</div>
 
-          <div>
-            <p className="text-zinc-500 text-sm">
-              Lost & Found
-            </p>
+<div>
+  <p className="text-zinc-500 text-sm">
+    Category
+  </p>
 
-            <h3 className="font-semibold">
-              AirPods Pro
-            </h3>
-          </div>
+  <h3 className="font-semibold">
+    Artificial Intelligence
+  </h3>
+</div>
 
-          <div>
-            <p className="text-zinc-500 text-sm">
-              Tutoring
-            </p>
+<div>
+  <p className="text-zinc-500 text-sm">
+    Category
+  </p>
 
-            <h3 className="font-semibold">
-              JavaScript Basics
-            </h3>
-          </div>
+  <h3 className="font-semibold">
+    Internet of Things (IoT)
+  </h3>
+</div>
 
         </div>
 
       </div>
 
-      {/* Active Students */}
+      {/* Project Technologies */}
 
-      <div className="p-6 rounded-3xl bg-zinc-900 border border-zinc-800">
+     {/* Project Technologies */}
 
-        <h2 className="text-2xl font-bold mb-6">
-          Active Students
-        </h2>
+<div className="p-6 rounded-3xl bg-zinc-900 border border-zinc-800">
 
-        <div className="space-y-4">
+  <h2 className="text-2xl font-bold mb-6">
+    Project Technologies
+  </h2>
 
-          <div className="flex items-center gap-3">
+  <div className="space-y-4">
 
-            <img
-              src="https://i.pravatar.cc/100?img=1"
-              className="w-12 h-12 rounded-full"
-            />
+    <div>
+      <h3 className="font-semibold">
+        React.js
+      </h3>
+    </div>
 
-            <div>
+    <div>
+      <h3 className="font-semibold">
+        Firebase
+      </h3>
+    </div>
 
-              <h3 className="font-semibold">
-                Kritchaya
-              </h3>
+    <div>
+      <h3 className="font-semibold">
+        Node.js
+      </h3>
+    </div>
 
-              <p className="text-zinc-500 text-sm">
-                Frontend Developer
-              </p>
+    <div>
+      <h3 className="font-semibold">
+        Tailwind CSS
+      </h3>
+    </div>
 
-            </div>
+  </div>
 
-          </div>
-
-          <div className="flex items-center gap-3">
-
-            <img
-              src="https://i.pravatar.cc/100?img=2"
-              className="w-12 h-12 rounded-full"
-            />
-
-            <div>
-
-              <h3 className="font-semibold">
-                Napat
-              </h3>
-
-              <p className="text-zinc-500 text-sm">
-                UI Designer
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
+</div>
 
     </aside>
   )

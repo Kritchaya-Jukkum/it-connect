@@ -24,7 +24,7 @@ function Hero() {
 
       <p className="text-zinc-400 text-xl mt-8 max-w-3xl leading-relaxed">
 
-        IT Connect คือแพลตฟอร์มกลางสำหรับนักศึกษาแผนก IT
+        IT Project Hub คือแพลตฟอร์มกลางสำหรับนักศึกษาแผนก IT
         ที่รวม Community, Q&A, Lost & Found,
         การช่วยเหลือด้านการเรียน และกิจกรรมต่าง ๆ
         ไว้ในที่เดียว

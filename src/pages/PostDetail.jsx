@@ -87,7 +87,7 @@ function PostDetail() {
 
   <div className="space-y-4">
 
-{post.comments.map((c, index) => (
+{(post.comments || []).map((c, index) => (
 
   <div
     key={index}
@@ -156,28 +156,45 @@ function PostDetail() {
                   : "bg-green-500/20 text-green-400"
                 }`}
             >
-              {post.type}
-            </div>
+             <h1 className="text-6xl font-bold mb-6">
+  {post.title}
+</h1>
 
-            <h1 className="text-6xl font-bold mb-6">
-              {post.title}
-            </h1>
+<div className="space-y-4 text-zinc-400 text-lg">
 
-            <div className="space-y-4 text-zinc-400 text-lg">
+  <p>
+    👥 Members: {post.members}
+  </p>
 
-              <p>
-                📍 Location: {post.location}
-              </p>
+  <p>
+    👨‍🏫 Advisor: {post.advisor}
+  </p>
 
-              <p>
-                👤 Posted by: {post.user}
-              </p>
+  <p>
+    🛠 Technology: {post.technology}
+  </p>
 
-              <p>
-                ⏰ {post.time}
-              </p>
+  <p>
+    👤 Created by: {post.user}
+  </p>
 
-            </div>
+  <p>
+    ⏰ {post.time}
+  </p>
+
+</div>
+
+<div className="mt-10">
+
+  <h2 className="text-3xl font-bold mb-4">
+    Project Description
+  </h2>
+
+  <p className="text-zinc-400 leading-relaxed">
+    {post.description}
+  </p>
+
+</div>
 
             <div className="mt-10">
 

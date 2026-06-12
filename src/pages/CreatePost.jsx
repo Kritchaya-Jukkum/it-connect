@@ -15,11 +15,12 @@ function CreatePost() {
   const { user } = useContext(AuthContext)
 
   const navigate = useNavigate()
-
   const [title, setTitle] = useState("")
-  const [location, setLocation] = useState("")
-  const [type, setType] = useState("LOST")
-  const [category, setCategory] = useState("Lost & Found")
+  const [members, setMembers] = useState("")
+const [advisor, setAdvisor] = useState("")
+const [technology, setTechnology] = useState("")
+  const [description, setDescription] = useState("")
+  const [category, setCategory] = useState("Web Application")
   const [image, setImage] = useState("")
   function handleImageUpload(e) {
 
@@ -43,27 +44,19 @@ function CreatePost() {
 
     try {
 
-      await addDoc(collection(db, "posts"), {
+     await addDoc(collection(db, "posts"), {
 
-        category,
+  category,
 
-        type,
+  title,
 
-        title,
+  members,
 
-        location,
+  advisor,
 
-        user: user?.displayName || "Anonymous",
+  technology,
 
-        avatar: user?.photoURL || "",
-
-        time: "Just now",
-
-        image,
-
-        likes: 0,
-
-        comments: []
+  description,
 
       })
 
@@ -87,16 +80,16 @@ function CreatePost() {
         <div className="w-full max-w-2xl p-8 rounded-3xl bg-zinc-900 border border-zinc-800">
 
           <h1 className="text-5xl font-bold mb-10">
-            Create Post
-          </h1>
+  Add Project
+</h1>
 
           {/* Category */}
 
           <div className="mb-6">
 
             <label className="block mb-3 text-zinc-400">
-              Category
-            </label>
+  Project Category (ประเภทโครงงาน)
+</label>
 
             <select
               value={category}
@@ -104,67 +97,46 @@ function CreatePost() {
               className="w-full p-4 rounded-2xl bg-zinc-800 border border-zinc-700 outline-none"
             >
 
-              <option>
-                Lost & Found
-              </option>
+             <option>
+  Web Application
+</option>
 
-              <option>
-                Q&A
-              </option>
+<option>
+  Mobile Application
+</option>
 
-              <option>
-                Tutoring
-              </option>
+<option>
+  Artificial Intelligence
+</option>
 
-              <option>
-                Projects
-              </option>
+<option>
+  Internet of Things (IoT)
+</option>
 
-              <option>
-                Events
-              </option>
+<option>
+  Game Development
+</option>
 
-            </select>
-
-          </div>
-
-          {/* Type */}
-
-          <div className="mb-6">
-
-            <label className="block mb-3 text-zinc-400">
-              Post Type
-            </label>
-
-            <select
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-              className="w-full p-4 rounded-2xl bg-zinc-800 border border-zinc-700 outline-none"
-            >
-
-              <option value="LOST">
-                LOST ITEM
-              </option>
-
-              <option value="FOUND">
-                FOUND ITEM
-              </option>
+<option>
+  Other
+</option>
 
             </select>
 
           </div>
 
-          {/* Title */}
+
+          {/* Project Name */}
 
           <div className="mb-6">
 
             <label className="block mb-3 text-zinc-400">
-              Item Name
+              Project Name (ชื่อโครงงาน)
             </label>
 
             <input
               type="text"
-              placeholder="Enter item name"
+              placeholder="Enter project name"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className="w-full p-4 rounded-2xl bg-zinc-800 border border-zinc-700 outline-none"
@@ -172,12 +144,60 @@ function CreatePost() {
 
           </div>
 
+<div className="mb-6">
+
+  <label className="block mb-3 text-zinc-400">
+    Members (สมาชิก)
+  </label>
+
+  <input
+    type="text"
+    placeholder="Enter member names"
+    value={members}
+    onChange={(e) => setMembers(e.target.value)}
+    className="w-full p-4 rounded-2xl bg-zinc-800 border border-zinc-700 outline-none"
+  />
+
+</div>
+<div className="mb-6">
+
+  <label className="block mb-3 text-zinc-400">
+    Advisor (อาจารย์ที่ปรึกษา)
+  </label>
+
+  <input
+    type="text"
+    placeholder="Enter advisor name"
+    value={advisor}
+    onChange={(e) => setAdvisor(e.target.value)}
+    className="w-full p-4 rounded-2xl bg-zinc-800 border border-zinc-700 outline-none"
+  />
+
+</div>
+<div className="mb-6">
+
+ <label className="block mb-3 text-zinc-400">
+  Tools & Technologies Used (เครื่องมือและเทคโนโลยีที่ใช้)
+  </label>
+
+  <input
+    type="text"
+    placeholder="React, Firebase, Node.js"
+    value={technology}
+    onChange={(e) => setTechnology(e.target.value)}
+    className="w-full p-4 rounded-2xl bg-zinc-800 border border-zinc-700 outline-none"
+  />
+
+</div>
+
+        
+
   {/* Upload Image */}
 
 <div className="mb-6">
 
   <label className="block mb-3 text-zinc-400">
-    Upload Image
+    Upload Image (อัปโหลดรูปภาพ)
   </label>
 
   <label className="flex items-center justify-center w-full h-40 border-2 border-dashed border-zinc-700 rounded-3xl cursor-pointer hover:border-blue-500 transition bg-zinc-900">
@@ -226,16 +246,16 @@ function CreatePost() {
           <div className="mb-8">
 
             <label className="block mb-3 text-zinc-400">
-              Location
+              Project Description (รายละเอียดโครงงาน)
             </label>
 
             <input
-              type="text"
-              placeholder="Enter location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="w-full p-4 rounded-2xl bg-zinc-800 border border-zinc-700 outline-none"
-            />
+  type="text"
+  placeholder="Enter project description"
+  value={description}
+  onChange={(e) => setDescription(e.target.value)}
+  className="w-full p-4 rounded-2xl bg-zinc-800 border border-zinc-700 outline-none"
+/>
 
           </div>
 
@@ -244,7 +264,7 @@ function CreatePost() {
             className="w-full py-4 rounded-2xl bg-blue-600 hover:bg-blue-500 transition"
           >
 
-            Publish Post
+            Publish Project
 
           </button>
 
