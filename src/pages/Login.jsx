@@ -1,6 +1,6 @@
 import { useContext } from "react"
 
-import { AuthContext } from "../context/AuthContext"
+import { AuthContext } from "../context/auth"
 
 import { Navigate } from "react-router-dom"
 
@@ -20,11 +20,11 @@ function Login() {
       <div className="w-full max-w-md p-8 rounded-3xl bg-zinc-900 border border-zinc-800 text-white">
 
         <h1 className="text-5xl font-bold mb-4 text-center">
-          Welcome Back
+          ยินดีต้อนรับ
         </h1>
 
         <p className="text-zinc-400 text-center mb-10">
-          Sign in to IT Project Hub
+          เข้าสู่ระบบเพื่อใช้งาน IT Project Hub
         </p>
 
         <button
@@ -32,7 +32,7 @@ function Login() {
           className="w-full py-4 rounded-2xl bg-white text-black font-semibold hover:scale-[1.02] transition"
         >
 
-          Continue with Google
+          เข้าสู่ระบบด้วย Google
 
         </button>
 

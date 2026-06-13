@@ -1,11 +1,12 @@
         import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { addDoc, collection } from "firebase/firestore"
 
 import Navbar from "../components/Navbar"
-import { AuthContext } from "../context/auth"
-import { db } from "../firebase/firebase"
 
+import { db } from "../firebase/firebase"
+import { doc, getDoc, updateDoc } from "firebase/firestore"
+import { useParams } from "react-router-dom"
+import { useEffect } from "react"
 const categories = [
   "Web Application",
   "Mobile Application",
@@ -15,8 +16,9 @@ const categories = [
   "Other",
 ]
 
-function CreatePost() {
-  const { user } = useContext(AuthContext)
+function EditProject() {
+
+  const { id } = useParams()
   const navigate = useNavigate()
 
   const [category, setCategory] = useState(categories[0])
@@ -30,6 +32,34 @@ function CreatePost() {
   const [pdfUrl, setPdfUrl] = useState("")
   const [videoUrl, setVideoUrl] = useState("")
 
+  useEffect(() => {
+
+  async function loadProject() {
+
+    const snap = await getDoc(
+      doc(db, "posts", id)
+    )
+
+    if (!snap.exists()) return
+
+    const data = snap.data()
+
+    setCategory(data.category || "")
+    setProjectName(data.projectName || "")
+    setAcademicYear(data.academicYear || "2569")
+    setMembers(data.members || "")
+    setAdvisor(data.advisor || "")
+    setTechnologies(data.technologies || "")
+    setDescription(data.description || "")
+    setPdfUrl(data.pdfUrl || "")
+    setVideoUrl(data.videoUrl || "")
+    setImage(data.image || "")
+    
+  }
+
+  loadProject()
+
+}, [id])
   function handleImageUpload(e) {
     const file = e.target.files[0]
 
@@ -45,43 +75,40 @@ function CreatePost() {
   }
 
   async function handleSubmit() {
-    if (!projectName.trim()) return
 
-    try {
-      await addDoc(collection(db, "posts"), {
-        status: "pending",
+  if (!projectName.trim()) return
+
+  try {
+
+    await updateDoc(
+      doc(db, "posts", id),
+      {
         category,
         academicYear,
         projectName,
         title: projectName,
+
         members,
         advisor,
+
         technologies,
         technology: technologies,
+
         description,
         image,
+
         pdfUrl,
         videoUrl,
-        user: user?.displayName || "ไม่ระบุชื่อ",
-        avatar: user?.photoURL || "",
-        ownerId: user?.uid || "",
-        time: new Date().toLocaleString(),
-      })
+      }
+    )
 
-      navigate("/feed")
-    } catch (error) {
-      console.log(error)
-    }
+    navigate("/feed")
+
+  } catch (error) {
+
+    console.log(error)
+
   }
-if (!user) {
-
-  return (
-    <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
-      <h1 className="text-4xl font-bold">
-        กรุณาเข้าสู่ระบบก่อนเพิ่มโครงการ
-      </h1>
-    </div>
-  )
 
 }
   return (
@@ -90,7 +117,7 @@ if (!user) {
 
       <div className="p-10 flex justify-center">
         <div className="w-full max-w-2xl p-8 rounded-3xl bg-zinc-900 border border-zinc-800">
-          <h1 className="text-5xl font-bold mb-10">เพิ่มโครงการ</h1>
+          <h1 className="text-5xl font-bold mb-10">แก้ไขโครงการ</h1>
 
           <div className="mb-6">
             <label className="block mb-3 text-zinc-400">หมวดหมู่โครงการ</label>
@@ -117,18 +144,15 @@ if (!user) {
           </div>
 
           <div className="mb-6">
-  <label className="block mb-3 text-zinc-400">
-    สมาชิกในกลุ่ม
-  </label>
-
-  <textarea
-    placeholder={`รายชื่อสมาชิกในกลุ่ม (เช่น)\n- นายสมชาย ใจดี\n- นางสาวสมหญิง แสนสวย\n- นายสมปอง สุดหล่อ`}
-    value={members}
-    onChange={(e) => setMembers(e.target.value)}
-    rows={4}
-    className="w-full p-4 rounded-2xl bg-zinc-800 border border-zinc-700 outline-none"
-  />
-</div>
+            <label className="block mb-3 text-zinc-400">สมาชิกในกลุ่ม</label>
+            <input
+              type="text"
+              placeholder="กรอกรายชื่อสมาชิก"
+              value={members}
+              onChange={(e) => setMembers(e.target.value)}
+              className="w-full p-4 rounded-2xl bg-zinc-800 border border-zinc-700 outline-none"
+            />
+          </div>
 
           <div className="mb-6">
             <label className="block mb-3 text-zinc-400">อาจารย์ที่ปรึกษา</label>
@@ -237,7 +261,7 @@ if (!user) {
             onClick={handleSubmit}
             className="w-full py-4 rounded-2xl bg-blue-600 hover:bg-blue-500 transition"
           >
-            เผยแพร่โครงการ
+            บันทึกการแก้ไข
           </button>
         </div>
       </div>
@@ -245,4 +269,4 @@ if (!user) {
   )
 }
 
-export default CreatePost
+export default EditProject

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 import {
   GoogleAuthProvider,
@@ -7,9 +7,16 @@ import {
   signOut
 } from "firebase/auth"
 
-import { auth } from "../firebase/firebase"
+import { auth, db } from "../firebase/firebase"
 
-export const AuthContext = createContext()
+import {
+  doc,
+  getDoc,
+  setDoc
+} from "firebase/firestore"
+
+
+import { AuthContext } from "./auth"
 
 function AuthProvider({ children }) {
 
@@ -17,19 +24,46 @@ function AuthProvider({ children }) {
 
   const provider = new GoogleAuthProvider()
 
-  async function login() {
+async function login() {
 
-    try {
+  try {
 
-      await signInWithPopup(auth, provider)
+    const result = await signInWithPopup(
+      auth,
+      provider
+    )
 
-    } catch (error) {
+    const user = result.user
 
-      console.log(error)
+    const userRef = doc(
+      db,
+      "users",
+      user.uid
+    )
+
+    const userSnap = await getDoc(userRef)
+
+    if (!userSnap.exists()) {
+
+      await setDoc(userRef, {
+
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+
+        role: "student"
+
+      })
 
     }
 
+  } catch (error) {
+
+    console.log(error)
+
   }
+
+}
 
   async function logout() {
 
@@ -37,17 +71,43 @@ function AuthProvider({ children }) {
 
   }
 
-  useEffect(() => {
+useEffect(() => {
 
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  const unsubscribe = onAuthStateChanged(
+    auth,
+    async (currentUser) => {
 
-      setUser(currentUser)
+      if (!currentUser) {
 
-    })
+        setUser(null)
+        return
 
-    return () => unsubscribe()
+      }
 
-  }, [])
+      const userRef = doc(
+        db,
+        "users",
+        currentUser.uid
+      )
+
+      const userSnap = await getDoc(userRef)
+
+      const userData = userSnap.data()
+
+      setUser({
+
+        ...currentUser,
+
+        role: userData?.role || "student"
+
+      })
+
+    }
+  )
+
+  return () => unsubscribe()
+
+}, [])
 
   return (
 

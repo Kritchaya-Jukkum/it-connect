@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { useState } from "react"
 import { useEffect } from "react"
 
 import { db } from "../firebase/firebase"
@@ -7,7 +7,7 @@ import {
   collection,
   onSnapshot
 } from "firebase/firestore"
-export const PostContext = createContext()
+import { PostContext } from "./posts"
 
 function PostProvider({ children }) {
 

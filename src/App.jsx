@@ -6,7 +6,8 @@ import Feed from "./pages/Feed"
 import CreatePost from "./pages/CreatePost"
 import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
-
+import EditProject from "./pages/EditProject"
+import Admin from "./pages/Admin"
 function App() {
   return (
     <BrowserRouter>
@@ -27,6 +28,9 @@ function App() {
 
         <Route path="/profile" element={<Profile />} />
 
+        <Route path="/edit/:id" element={<EditProject />} />
+
+        <Route path="/admin" element={<Admin />} />
       </Routes>
 
     </BrowserRouter>
