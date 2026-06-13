@@ -49,7 +49,9 @@ function CreatePost() {
 
     try {
       await addDoc(collection(db, "posts"), {
+        
         status: "pending",
+        rejectReason: "",
         category,
         academicYear,
         projectName,

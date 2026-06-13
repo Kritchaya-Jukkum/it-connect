@@ -99,6 +99,9 @@ function EditProject() {
 
         pdfUrl,
         videoUrl,
+
+        status: "pending",
+        rejectReason: "",
       }
     )
 

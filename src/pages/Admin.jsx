@@ -34,6 +34,7 @@ async function approvePost(postId) {
   }
 
 }
+
 function Admin() {
 
   const { posts } = useContext(PostContext)
@@ -42,7 +43,35 @@ function Admin() {
   const [totalAdmins, setTotalAdmins] = useState(0)
   const [totalStudents, setTotalStudents] = useState(0)
   const [users, setUsers] = useState([])
+  const [showRejectModal, setShowRejectModal] = useState(false)
+  const [selectedPostId, setSelectedPostId] = useState("")
+  const [rejectReason, setRejectReason] = useState("")
+async function rejectPost() {
 
+  if (!rejectReason.trim()) return
+
+  try {
+
+    await updateDoc(
+      doc(db, "posts", selectedPostId),
+      {
+        status: "rejected",
+        rejectReason
+      }
+    )
+
+    setShowRejectModal(false)
+    setRejectReason("")
+
+    window.location.reload()
+
+  } catch (error) {
+
+    console.log(error)
+
+  }
+
+}
   useEffect(() => {
 
   async function loadUsers() {
@@ -339,12 +368,26 @@ body: posts.map((post) => [
   <div className="flex gap-2">
 
   {post.status === "pending" && (
-    <button
-      onClick={() => approvePost(post.id)}
-      className="px-4 py-2 rounded-xl bg-green-600 hover:bg-green-500"
-    >
-      อนุมัติ
-    </button>
+    <>
+      <button
+        onClick={() => approvePost(post.id)}
+        className="px-4 py-2 rounded-xl bg-green-600 hover:bg-green-500"
+      >
+        อนุมัติ
+      </button>
+
+      <button
+  onClick={() => {
+
+    setSelectedPostId(post.id)
+    setShowRejectModal(true)
+
+  }}
+  className="px-4 py-2 rounded-xl bg-yellow-600 hover:bg-yellow-500"
+>
+  ปฏิเสธ
+</button>
+    </>
   )}
 
   <button
@@ -356,10 +399,58 @@ body: posts.map((post) => [
 
 </div>
 
+
+
               </div>
           </div>
         ))}
       </div>
+      {showRejectModal && (
+
+  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+
+    <div className="w-full max-w-lg bg-zinc-900 rounded-3xl p-6">
+
+      <h2 className="text-2xl font-bold mb-4">
+        เหตุผลที่ปฏิเสธ
+      </h2>
+
+      <textarea
+        value={rejectReason}
+        onChange={(e) =>
+          setRejectReason(e.target.value)
+        }
+        rows={5}
+        placeholder="กรอกเหตุผล..."
+        className="w-full p-4 rounded-2xl bg-zinc-800 border border-zinc-700"
+      />
+
+      <div className="flex justify-end gap-3 mt-6">
+
+        <button
+          onClick={() => {
+            setShowRejectModal(false)
+            setRejectReason("")
+          }}
+          className="px-5 py-2 rounded-xl bg-zinc-700"
+        >
+          ยกเลิก
+        </button>
+
+        <button
+          onClick={rejectPost}
+          className="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-500"
+        >
+          ยืนยัน
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+)}
     </main>
   </div>
 )

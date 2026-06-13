@@ -47,13 +47,14 @@ function Sidebar() {
       <span>Admin Panel</span>
     </div>
   </Link>
+
 )}
-        <Link to="/profile">
-          <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-900 transition">
-            <span className="text-xl">ฉัน</span>
-            <span>โปรไฟล์</span>
-          </div>
-        </Link>
+       <Link to="/my-projects">
+  <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-900 transition">
+    <span className="text-xl">📁</span>
+    <span>โครงงานของฉัน</span>
+  </div>
+</Link>
       </nav>
 
       <div className="mt-auto p-6 rounded-3xl bg-gradient-to-br from-blue-600 to-purple-600">

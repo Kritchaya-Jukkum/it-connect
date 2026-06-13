@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Profile from "./pages/Profile"
+import MyProjects from "./pages/MyProjects"
 import PostDetail from "./pages/PostDetail"
 import Home from "./pages/Home"
 import Feed from "./pages/Feed"
@@ -26,11 +26,13 @@ function App() {
 
         <Route path="/post/:id" element={<PostDetail />} />
 
-        <Route path="/profile" element={<Profile />} />
-
         <Route path="/edit/:id" element={<EditProject />} />
 
         <Route path="/admin" element={<Admin />} />
+
+        <Route path="/my-projects" element={<MyProjects />}
+/>
+
       </Routes>
 
     </BrowserRouter>
