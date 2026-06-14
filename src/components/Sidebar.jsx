@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom"
 import { useContext } from "react"
 import { AuthContext } from "../context/auth"
+import { Link, useLocation } from "react-router-dom"
 function Sidebar() {
 
   const { user } = useContext(AuthContext)
+  const location = useLocation()
 
   return (
     <aside className="hidden md:flex flex-col w-72 h-screen sticky top-0 border-r border-white/10 bg-zinc-950/80 backdrop-blur-2xl p-6">
@@ -21,28 +22,52 @@ function Sidebar() {
 
       <nav className="space-y-3">
         <Link to="/feed">
-          <div className="flex items-center gap-4 p-4 rounded-2xl bg-blue-600 text-white hover:scale-[1.02] transition">
-            <span className="text-xl">หน้า</span>
-            <span className="font-semibold">โครงการทั้งหมด</span>
-          </div>
-        </Link>
+  <div
+    className={`flex items-center gap-4 p-4 rounded-2xl transition ${
+      location.pathname === "/feed"
+        ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20"
+        : "hover:bg-zinc-900"
+    }`}
+  >
+    <span className="text-xl">🏠</span>
+    <span className="font-semibold">โครงการทั้งหมด</span>
+  </div>
+</Link>
 
         <Link to="/create">
-          <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-900 transition">
+          <div
+className={`flex items-center gap-4 p-4 rounded-2xl transition ${
+  location.pathname === "/create"
+    ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20"
+    : "hover:bg-zinc-900"
+}`}
+>
             <span className="text-xl">เพิ่ม</span>
             <span>เพิ่มโครงการ</span>
           </div>
         </Link>
 
         <Link to="/dashboard">
-          <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-900 transition">
+          <div
+className={`flex items-center gap-4 p-4 rounded-2xl transition ${
+  location.pathname === "/dashboard"
+    ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20"
+    : "hover:bg-zinc-900"
+}`}
+>
             <span className="text-xl">สถิติ</span>
             <span>แดชบอร์ด</span>
           </div>
         </Link>
         {user?.role === "admin" && (
   <Link to="/admin">
-    <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-900 transition">
+   <div
+className={`flex items-center gap-4 p-4 rounded-2xl transition ${
+  location.pathname === "/admin"
+    ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20"
+    : "hover:bg-zinc-900"
+}`}
+>
       <span className="text-xl">จัดการ</span>
       <span>Admin Panel</span>
     </div>
@@ -50,7 +75,13 @@ function Sidebar() {
 
 )}
        <Link to="/my-projects">
-  <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-900 transition">
+  <div
+className={`flex items-center gap-4 p-4 rounded-2xl transition ${
+  location.pathname === "/my-projects"
+    ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20"
+    : "hover:bg-zinc-900"
+}`}
+>
     <span className="text-xl">📁</span>
     <span>โครงงานของฉัน</span>
   </div>
@@ -65,10 +96,10 @@ function Sidebar() {
         </p>
 
         <Link to="/feed">
-          <button className="w-full py-3 rounded-2xl bg-white text-black font-bold">
-            ดูโครงการ
-          </button>
-        </Link>
+  <button className="w-full py-3 rounded-2xl bg-white text-black font-bold hover:scale-[1.02] transition">
+    ดูโครงการ
+  </button>
+</Link>
       </div>
     </aside>
   )

@@ -87,7 +87,17 @@ const gameProjects = posts.filter(
   { category: "Game", count: stats.gameProjects },
 ]
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex">
+    <div
+className="
+min-h-screen
+bg-gradient-to-br
+from-zinc-950
+via-slate-950
+to-black
+text-white
+flex
+"
+>
       <Sidebar />
 
       <main className="flex-1 w-full max-w-6xl mx-auto p-4 md:p-8">
